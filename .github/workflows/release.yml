@@ -1,0 +1,43 @@
+name: Create release
+
+on:
+  push:
+    tags: ["*.*.*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Create release with zip of the project
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Get repository name
+        id: repo_info
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY##*/}"
+          echo "repo_name=$REPO_NAME" >> $GITHUB_OUTPUT
+          echo "tag_name=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+
+      - name: Create zip archive
+        # Create a zip of the repository files that excludes .git, .github, and .godot directories
+        run: |
+          zip -r "${{ steps.repo_info.outputs.repo_name }}.zip" . \
+            -x "*.git*" \
+            -x ".godot/*"
+
+      - name: Create release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Release ${{ steps.repo_info.outputs.tag_name }}
+          body: |
+            To explore the demo, download the zip file below and import it in Godot.
+
+            Head to the GDQuest Free Library for a detailed guide to get you started with saving and loading in Godot: [Saving and loading games in Godot 4 (with resources)](https://gdquest.com/library/save_game_godot4/)
+          draft: false
+          prerelease: false
+          files: ${{ steps.repo_info.outputs.repo_name }}.zip
