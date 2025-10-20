@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1yrk33055lj5"]
+
+[ext_resource type="Texture2D" uid="uid://d3f2hpda0n0gd" path="res://interface/bar_background.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://c2ttqfh1i54uv" path="res://interface/bar_fill.png" id="2"]
+[ext_resource type="Script" uid="uid://cbpmenntwxk2k" path="res://interface/experience_bar.gd" id="3"]
+[ext_resource type="Texture2D" uid="uid://cuhbg2wspxs87" path="res://interface/text_experience.png" id="4"]
+
+[node name="ExperienceBar" type="TextureProgressBar"]
+offset_right = 861.0
+offset_bottom = 69.0
+max_value = 34.0
+step = 0.05
+value = 15.0
+texture_under = ExtResource("1")
+texture_progress = ExtResource("2")
+script = ExtResource("3")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_top = -53.0
+offset_right = 343.0
+offset_bottom = -15.0
+texture = ExtResource("4")

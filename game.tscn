@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmekn0vlbo50k"]
+
+[ext_resource type="Script" uid="uid://bor8mhwft1id0" path="res://game.gd" id="1_7jktm"]
+[ext_resource type="Script" uid="uid://wdiq5bld7b1f" path="res://character.gd" id="2_ryrav"]
+[ext_resource type="PackedScene" uid="uid://c1yrk33055lj5" path="res://interface/experience_bar.tscn" id="3_eow3j"]
+[ext_resource type="FontFile" uid="uid://0ryos52rkkfa" path="res://fonts/Montserrat-Medium.ttf" id="4_j5wjh"]
+[ext_resource type="Script" uid="uid://b7mjuigbuvay8" path="res://label.gd" id="5_vef74"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_7jktm")
+
+[node name="Character" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("2_ryrav")
+
+[node name="InterfaceControl" type="Control" parent="."]
+custom_minimum_size = Vector2(0, 120)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="InterfaceControl"]
+layout_mode = 0
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.238983, 0.251691, 0.320313, 1)
+
+[node name="ExperienceBar" parent="InterfaceControl" instance=ExtResource("3_eow3j")]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.525
+anchor_right = 0.5
+anchor_bottom = 0.525
+offset_left = -430.5
+offset_top = -34.5
+offset_right = 430.5
+offset_bottom = 34.5
+grow_horizontal = 2
+grow_vertical = 2
+value = 28.0
+
+[node name="Label" type="Label" parent="InterfaceControl"]
+unique_name_in_owner = true
+modulate = Color(0.921569, 0.533333, 0.529412, 1)
+layout_mode = 0
+offset_left = 80.0
+offset_top = 80.0
+offset_right = 314.0
+offset_bottom = 249.0
+theme_override_fonts/font = ExtResource("4_j5wjh")
+theme_override_font_sizes/font_size = 32
+text = "Level: 4
+			Experience: 86
+			Next level: 23
+			"
+script = ExtResource("5_vef74")
+
+[connection signal="experience_gained" from="Character" to="InterfaceControl/ExperienceBar" method="_on_character_experience_gained"]
