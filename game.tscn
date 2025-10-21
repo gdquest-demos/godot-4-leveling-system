@@ -33,9 +33,9 @@ unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.525
+anchor_top = 0.8
 anchor_right = 0.5
-anchor_bottom = 0.525
+anchor_bottom = 0.8
 offset_left = -430.5
 offset_top = -34.5
 offset_right = 430.5
@@ -54,10 +54,16 @@ offset_right = 314.0
 offset_bottom = 249.0
 theme_override_fonts/font = ExtResource("4_j5wjh")
 theme_override_font_sizes/font_size = 32
-text = "Level: 4
-			Experience: 86
-			Next level: 23
+text = "Character
+	Max HP: 8
+	Strenght: 6
+	Magic: 5
+
+	Level: 4
+		Experience: 86
+		Next level: 23
 			"
+tab_stops = PackedFloat32Array(48)
 script = ExtResource("5_vef74")
 
 [connection signal="experience_gained" from="Character" to="InterfaceControl/ExperienceBar" method="_on_character_experience_gained"]

@@ -1,3 +1,4 @@
+class_name Character
 extends Node
 
 # `growth_data` gets passed to the experience progress bar. The first value of the array
@@ -19,7 +20,15 @@ var experience_required := get_required_experience(level + 1)
 
 
 func get_required_experience(for_level: int) -> int:
-	return roundi(pow(for_level, 1.8) + for_level * 4)
+	# If you followed along with the first video tutorial, this is the formula that was shown
+	# for calculating the required experience for a level up.
+	#
+	# We used the same variable names as the red formula from Desmos for greater clarity.
+	# See the graph at: https://www.desmos.com/calculator/0r0mrngda2
+	var a := 4.0
+	var b := 1.8
+	var x := for_level
+	return roundi(a * x + pow(x, b))
 
 
 func gain_experience(amount: int) -> void:
@@ -41,6 +50,8 @@ func level_up() -> void:
 	level += 1
 	experience_required = get_required_experience(level + 1)
 
-	var stats: Array[String] = ["max_hp", "strength", "magic"]
-	var random_stat := stats[randi() % stats.size()]
-	set(random_stat, get(random_stat) + randi() % 4)
+	# We simulate the player picking stats to increase, by selecting a random
+	# stat each time we level up and increasing it with a random number.
+	var stats := ["max_hp", "strength", "magic"]
+	var random_stat: String = stats.pick_random()
+	set(random_stat, get(random_stat) + randi_range(1, 3))
