@@ -42,7 +42,6 @@ offset_right = 430.5
 offset_bottom = 34.5
 grow_horizontal = 2
 grow_vertical = 2
-value = 28.0
 
 [node name="Label" type="Label" parent="InterfaceControl"]
 unique_name_in_owner = true

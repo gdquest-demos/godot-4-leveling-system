@@ -1,4 +1,3 @@
-@tool
 extends TextureProgressBar
 
 func initialize(current: int, maximum: int) -> void:
